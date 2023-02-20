@@ -24,7 +24,8 @@ public class BookServiceImpl extends ServiceImpl<BookDao, Book> implements IBook
         IPage<Book> page = new Page<>(currentPage, pageSize);
         LambdaQueryWrapper<Book> lqw = new LambdaQueryWrapper<>();
         lqw.like(book.getName() != null, Book::getName, book.getName())
-                .eq(book.getType() != null, Book::getType, book.getType());
+                .eq(book.getType() != null, Book::getType, book.getType())
+                .eq(book.getStatus() != null, Book::getStatus, book.getStatus());
         return bookDao.selectPage(page, lqw);
     }
 }

@@ -24,13 +24,14 @@ public class Book {
     private int bookId;
     private String name;
     private String author;
-    private String edition;
+    private Integer edition;
     private double price;
     @TableField("publishing_house")
     private String publishingHouse;
     private Integer type;
     @TableField("publish_time")
     private Date publishTime;
+    private Integer status;
     @TableLogic
     @TableField("is_delete")
     private int isDelete;

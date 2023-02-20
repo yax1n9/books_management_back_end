@@ -28,4 +28,31 @@ public class BookController {
         }
         return new Result<>(200, "success", page);
     }
+
+    @PutMapping
+    public Result<String> modifyBook(@RequestBody Book book) {
+        boolean b = bookService.updateById(book);
+        if (b) {
+            return new Result<>(200, "success");
+        }
+        return new Result<>(201, "failed");
+    }
+
+    @PostMapping
+    public Result<String> insertBook(@RequestBody Book book) {
+        boolean b = bookService.save(book);
+        if (b) {
+            return new Result<>(200, "success");
+        }
+        return new Result<>(201, "failed");
+    }
+
+    @DeleteMapping("/{id}")
+    public Result<String> deleteBook(@PathVariable Integer id){
+        boolean b = bookService.removeById(id);
+        if (b){
+            return new Result<>(200, "success");
+        }
+        return new Result<>(201,"failed");
+    }
 }
