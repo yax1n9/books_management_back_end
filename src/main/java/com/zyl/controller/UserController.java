@@ -26,4 +26,14 @@ public class UserController {
         }
         return new Result<>(200, "success", page);
     }
+
+    @PutMapping
+    public Result<String> modifyUser(@RequestBody User user) {
+
+        boolean b = userService.updateById(user);
+        if (b) {
+            return new Result<>(200, "success");
+        }
+        return new Result<>(201, "failed");
+    }
 }

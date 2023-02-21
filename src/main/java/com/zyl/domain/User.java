@@ -62,7 +62,7 @@ public class User {
     @TableField("documentary_number")
     private String documentaryNumber;
     @TableField("reader_type")
-    private String readerType;
+    private int readerType;
     @TableField("is_delete")
     @TableLogic
     private int isDelete;
