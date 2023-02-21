@@ -4,6 +4,7 @@ import com.zyl.domain.Book;
 import com.zyl.domain.User;
 import com.zyl.service.IBookService;
 import com.zyl.service.ILoginService;
+import com.zyl.service.IUserService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -17,6 +18,16 @@ class ApplicationTests {
 
     @Autowired
     private IBookService bookService;
+
+    @Autowired
+    private IUserService userService;
+
+
+    @Test
+    void userServiceTest() {
+        System.out.println(userService.getUserPageByCondition(1, 10, new User()));
+    }
+
 
     @Test
     void contextLoads() {

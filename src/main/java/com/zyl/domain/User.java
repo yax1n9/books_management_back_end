@@ -8,6 +8,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.sql.Date;
 import java.sql.Timestamp;
 
 /**
@@ -24,18 +25,40 @@ public class User {
     private Integer userId;
     private int role;
     private String account;
+    @TableField(select = false)
     private String password;
     private String name;
     private int gender;
-    private int department;
-    private int position;
-    @TableField("professional_title")
-    private int professionalTitle;
-    private int education;
-    private int major;
+
+    @TableField("department_id")
+    private int departmentId;
+    @TableField(exist = false)
+    private String department;
+
+    @TableField("position_id")
+    private int positionId;
+    @TableField(exist = false)
+    private String position;
+
+    @TableField("professional_title_id")
+    private int professionalTitleId;
+    @TableField(exist = false)
+    private String professionalTitle;
+
+
+    @TableField("education_id")
+    private int educationId;
+    @TableField(exist = false)
+    private String education;
+
+    @TableField("major_id")
+    private int majorId;
+    @TableField(exist = false)
+    private String major;
+
     private String phone;
     @TableField("issuance_date")
-    private Timestamp issuanceDate;
+    private Date issuanceDate;
     @TableField("documentary_number")
     private String documentaryNumber;
     @TableField("reader_type")

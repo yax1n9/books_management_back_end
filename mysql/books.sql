@@ -24,12 +24,14 @@ DROP TABLE IF EXISTS `borrow_log`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `borrow_log` (
   `borrow_id` int NOT NULL AUTO_INCREMENT,
-  `borrow_name` varchar(20) NOT NULL COMMENT '借阅人姓名',
+  `user_id` int NOT NULL COMMENT '借阅人Id',
+  `user_name` varchar(20) NOT NULL COMMENT '借阅人姓名',
   `borrow_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '借阅日期',
   `reversion_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '返还日期',
+  `status` int NOT NULL DEFAULT '0' COMMENT '归还状态（0：未归还，1：已归还）',
   `is_delete` int NOT NULL DEFAULT '0' COMMENT '0：未删；1已删',
   PRIMARY KEY (`borrow_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='借阅记录';
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='借阅记录';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -38,6 +40,7 @@ CREATE TABLE `borrow_log` (
 
 LOCK TABLES `borrow_log` WRITE;
 /*!40000 ALTER TABLE `borrow_log` DISABLE KEYS */;
+INSERT INTO `borrow_log` VALUES (1,1,'admin','2023-02-21 11:57:01','2023-02-28 11:57:01',0,0),(2,1,'admin','2023-02-21 12:00:33','2023-02-28 12:00:33',0,0),(3,1,'admin','2023-02-21 12:04:06','2023-02-28 12:04:06',0,0),(4,1,'admin','2023-02-21 12:05:09','2023-02-28 12:05:09',0,0),(5,1,'admin','2023-02-21 14:15:43','2023-02-28 14:15:43',0,0),(6,1,'admin','2023-02-21 14:16:06','2023-02-28 14:16:06',0,0),(7,1,'admin','2023-02-21 14:18:05','2023-02-28 14:18:05',0,0);
 /*!40000 ALTER TABLE `borrow_log` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -60,7 +63,7 @@ CREATE TABLE `tb_book` (
   `status` int NOT NULL DEFAULT '0' COMMENT '借阅状态（0：未借出；1：已借出）',
   `is_delete` int NOT NULL DEFAULT '0' COMMENT '0：未删；1已删',
   PRIMARY KEY (`book_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -69,7 +72,7 @@ CREATE TABLE `tb_book` (
 
 LOCK TABLES `tb_book` WRITE;
 /*!40000 ALTER TABLE `tb_book` DISABLE KEYS */;
-INSERT INTO `tb_book` VALUES (1,'人性论','休谟',1,62.5,'台海出版社',1,'2023-02-17',0,0),(2,'纯粹理性批判','康德',1,40,'中国画报出版社',1,'2023-02-16',0,0),(3,'扫起落叶好过冬','林达',1,50,'三联书店',2,'2023-02-16',0,0),(4,'大变局下的中国法治','季卫东',1,35,'北京大学出版社',2,'2023-02-16',0,0),(5,'JAVA编程思想','埃克尔',4,108,'机械工业出版社',3,'2023-02-16',0,0),(6,'JavaScript高级程序设计','马特·弗里斯比',4,129,'人民邮电出版社',3,'2023-02-17',0,0),(7,'JavaScript权威指南','大卫·弗拉纳根',7,139,'机械工业出版社',3,'2021-03-01',0,0),(8,'test','test',1,0,'test',1,NULL,0,0),(9,'','',1,0,'',1,NULL,0,1),(10,'test','test',3,2,'test',2,'2023-02-20',0,0);
+INSERT INTO `tb_book` VALUES (1,'人性论','休谟',1,62.5,'台海出版社',1,'2023-02-17',0,0),(2,'纯粹理性批判','康德',1,40,'中国画报出版社',1,'2023-02-16',0,0),(3,'扫起落叶好过冬','林达',1,50,'三联书店',2,'2023-02-16',0,0),(4,'大变局下的中国法治','季卫东',1,35,'北京大学出版社',2,'2023-02-16',0,0),(5,'JAVA编程思想','埃克尔',4,108,'机械工业出版社',3,'2023-02-16',0,0),(6,'JavaScript高级程序设计','马特·弗里斯比',4,129,'人民邮电出版社',3,'2023-02-17',0,0),(7,'JavaScript权威指南','大卫·弗拉纳根',7,139,'机械工业出版社',3,'2021-03-01',1,0),(8,'test','test',1,0,'test',1,NULL,1,1),(9,'','',1,0,'',1,NULL,0,1),(10,'test','test',3,2,'test',2,'2023-02-20',1,0),(11,'test','test',1,112.99,'test',2,'2023-02-22',0,0);
 /*!40000 ALTER TABLE `tb_book` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -237,11 +240,11 @@ CREATE TABLE `tb_user` (
   `password` varchar(20) NOT NULL COMMENT '密码',
   `name` varchar(20) DEFAULT NULL COMMENT '姓名',
   `gender` int DEFAULT '0' COMMENT '0: 女 1：男',
-  `department` int DEFAULT NULL COMMENT '部门',
-  `position` int DEFAULT NULL COMMENT '职务',
-  `professional_title` int DEFAULT NULL COMMENT '职称',
-  `education` int DEFAULT NULL COMMENT '学历',
-  `major` int DEFAULT NULL COMMENT '专业',
+  `department_id` int DEFAULT NULL COMMENT '部门',
+  `position_id` int DEFAULT NULL COMMENT '职务',
+  `professional_title_id` int DEFAULT NULL COMMENT '职称',
+  `education_id` int DEFAULT NULL COMMENT '学历',
+  `major_id` int DEFAULT NULL COMMENT '专业',
   `phone` varchar(20) DEFAULT NULL COMMENT '电话',
   `issuance_date` date DEFAULT NULL COMMENT '办证日期',
   `documentary_number` varchar(20) DEFAULT NULL COMMENT '书证编号',
@@ -258,7 +261,7 @@ CREATE TABLE `tb_user` (
 
 LOCK TABLES `tb_user` WRITE;
 /*!40000 ALTER TABLE `tb_user` DISABLE KEYS */;
-INSERT INTO `tb_user` VALUES (1,1,'admin','admin','admin',0,1,1,1,1,1,NULL,'2023-02-16','1234567',1,0),(2,0,'user','user','user',0,1,1,1,1,1,NULL,'2023-02-16',NULL,2,0);
+INSERT INTO `tb_user` VALUES (1,1,'admin','admin','admin',0,1,1,1,1,6,NULL,'2023-02-16','1234567',1,0),(2,0,'user','user','user',0,1,1,1,1,7,NULL,'2023-02-16',NULL,2,0);
 /*!40000 ALTER TABLE `tb_user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -271,4 +274,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-02-20 17:49:48
+-- Dump completed on 2023-02-21 17:46:39

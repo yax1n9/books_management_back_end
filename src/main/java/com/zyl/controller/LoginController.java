@@ -32,8 +32,6 @@ public class LoginController {
         if (Objects.isNull(u)) {
             return new Result<>(201, "failed");
         }
-        // 密码信息不返回
-        u.setPassword("");
         return new Result<User>(200, "success", u);
     }
 }
