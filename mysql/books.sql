@@ -24,6 +24,8 @@ DROP TABLE IF EXISTS `borrow_log`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `borrow_log` (
   `borrow_id` int NOT NULL AUTO_INCREMENT,
+  `book_id` int NOT NULL COMMENT '图书id',
+  `book_name` varchar(50) NOT NULL COMMENT '书名',
   `user_id` int NOT NULL COMMENT '借阅人Id',
   `user_name` varchar(20) NOT NULL COMMENT '借阅人姓名',
   `borrow_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '借阅日期',
@@ -31,7 +33,7 @@ CREATE TABLE `borrow_log` (
   `status` int NOT NULL DEFAULT '0' COMMENT '归还状态（0：未归还，1：已归还）',
   `is_delete` int NOT NULL DEFAULT '0' COMMENT '0：未删；1已删',
   PRIMARY KEY (`borrow_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='借阅记录';
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='借阅记录';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -40,7 +42,7 @@ CREATE TABLE `borrow_log` (
 
 LOCK TABLES `borrow_log` WRITE;
 /*!40000 ALTER TABLE `borrow_log` DISABLE KEYS */;
-INSERT INTO `borrow_log` VALUES (1,1,'admin','2023-02-21 11:57:01','2023-02-28 11:57:01',0,0),(2,1,'admin','2023-02-21 12:00:33','2023-02-28 12:00:33',0,0),(3,1,'admin','2023-02-21 12:04:06','2023-02-28 12:04:06',0,0),(4,1,'admin','2023-02-21 12:05:09','2023-02-28 12:05:09',0,0),(5,1,'admin','2023-02-21 14:15:43','2023-02-28 14:15:43',0,0),(6,1,'admin','2023-02-21 14:16:06','2023-02-28 14:16:06',0,0),(7,1,'admin','2023-02-21 14:18:05','2023-02-28 14:18:05',0,0);
+INSERT INTO `borrow_log` VALUES (1,8,'test',1,'admin','2023-02-21 11:57:01','2023-02-28 11:57:01',0,0),(2,9,'',1,'admin','2023-02-21 12:00:33','2023-02-28 12:00:33',0,0),(3,8,'test',1,'admin','2023-02-21 12:04:06','2023-02-28 12:04:06',0,0),(4,9,'',1,'admin','2023-02-21 12:05:09','2023-02-28 12:05:09',0,0),(5,8,'test',1,'admin','2023-02-21 14:15:43','2023-02-28 14:15:43',0,0),(6,10,'test',1,'admin','2023-02-21 14:16:06','2023-02-28 14:16:06',0,0),(7,11,'test',1,'admin','2023-02-21 14:18:05','2023-02-28 14:18:05',0,0),(8,11,'test',2,'user','2023-02-22 09:18:38','2023-03-01 09:18:38',1,0),(9,6,'JavaScript高级程序设计',2,'user','2023-02-22 11:16:18','2023-03-01 11:16:18',1,0),(10,7,'JavaScript权威指南',2,'user','2023-02-22 11:19:18','2023-03-01 11:19:18',1,0);
 /*!40000 ALTER TABLE `borrow_log` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -72,7 +74,7 @@ CREATE TABLE `tb_book` (
 
 LOCK TABLES `tb_book` WRITE;
 /*!40000 ALTER TABLE `tb_book` DISABLE KEYS */;
-INSERT INTO `tb_book` VALUES (1,'人性论','休谟',1,62.5,'台海出版社',1,'2023-02-17',0,0),(2,'纯粹理性批判','康德',1,40,'中国画报出版社',1,'2023-02-16',0,0),(3,'扫起落叶好过冬','林达',1,50,'三联书店',2,'2023-02-16',0,0),(4,'大变局下的中国法治','季卫东',1,35,'北京大学出版社',2,'2023-02-16',0,0),(5,'JAVA编程思想','埃克尔',4,108,'机械工业出版社',3,'2023-02-16',0,0),(6,'JavaScript高级程序设计','马特·弗里斯比',4,129,'人民邮电出版社',3,'2023-02-17',0,0),(7,'JavaScript权威指南','大卫·弗拉纳根',7,139,'机械工业出版社',3,'2021-03-01',1,0),(8,'test','test',1,0,'test',1,NULL,1,1),(9,'','',1,0,'',1,NULL,0,1),(10,'test','test',3,2,'test',2,'2023-02-20',1,0),(11,'test','test',1,112.99,'test',2,'2023-02-22',0,0);
+INSERT INTO `tb_book` VALUES (1,'人性论','休谟',1,62.5,'台海出版社',1,'2023-02-17',0,0),(2,'纯粹理性批判','康德',1,40,'中国画报出版社',1,'2023-02-16',0,0),(3,'扫起落叶好过冬','林达',1,50,'三联书店',2,'2023-02-16',0,0),(4,'大变局下的中国法治','季卫东',1,35,'北京大学出版社',2,'2023-02-16',0,0),(5,'JAVA编程思想','埃克尔',4,108,'机械工业出版社',3,'2023-02-16',0,0),(6,'JavaScript高级程序设计','马特·弗里斯比',4,0,'人民邮电出版社',3,'2023-02-17',0,0),(7,'JavaScript权威指南','大卫·弗拉纳根',7,0,'机械工业出版社',3,'2021-03-01',0,0),(8,'test','test',1,0,'test',1,NULL,1,1),(9,'','',1,0,'',1,NULL,0,1),(10,'test','test',3,2,'test',2,'2023-02-20',1,1),(11,'test','test',1,0,'test',2,'2023-02-22',1,1);
 /*!40000 ALTER TABLE `tb_book` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -274,4 +276,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-02-21 17:46:39
+-- Dump completed on 2023-02-22 14:45:14
