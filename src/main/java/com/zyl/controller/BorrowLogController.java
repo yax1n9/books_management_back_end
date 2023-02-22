@@ -39,4 +39,14 @@ public class BorrowLogController {
         }
         return new Result<>(200, "success", page);
     }
+
+    @PutMapping
+    public Result<String> modifyLog(@RequestBody BorrowLog borrowLog) {
+
+        boolean b = borrowLogService.updateById(borrowLog);
+        if (b) {
+            return new Result<>(200, "success");
+        }
+        return new Result<>(201, "failed");
+    }
 }

@@ -1,6 +1,8 @@
 package com.zyl;
 
+import com.zyl.controller.BorrowLogController;
 import com.zyl.domain.Book;
+import com.zyl.domain.BorrowLog;
 import com.zyl.domain.User;
 import com.zyl.service.IBookService;
 import com.zyl.service.ILoginService;
@@ -21,6 +23,18 @@ class ApplicationTests {
 
     @Autowired
     private IUserService userService;
+
+    @Autowired
+    private BorrowLogController borrowLogController;
+
+
+    @Test
+    void BorrowLogControllerTest() {
+        BorrowLog borrowLog = new BorrowLog();
+        borrowLog.setBookName("user");
+        // borrowLog.setUserName("admin");
+        borrowLogController.getLogPage(1, 10, borrowLog);
+    }
 
 
     @Test

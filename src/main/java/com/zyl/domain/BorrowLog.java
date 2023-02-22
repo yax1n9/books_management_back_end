@@ -22,6 +22,12 @@ import java.sql.Timestamp;
 public class BorrowLog {
     @TableId
     private Integer borrowId;
+
+    @TableField("book_id")
+    private Integer bookId;
+    @TableField("book_name")
+    private String bookName;
+
     @TableField("user_id")
     private Integer userId;
     @TableField("user_name")
